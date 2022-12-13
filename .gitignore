@@ -4,6 +4,7 @@
 !polybar
 !ranger
 !kitty
+!rofi
 !.gitignore
 
 ranger/plugins

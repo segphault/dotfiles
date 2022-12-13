@@ -42,7 +42,9 @@ bindsym $mod+Return exec kitty
 bindsym $mod+c kill
 
 # display the launcher
-bindsym $mod+d exec "rofi -modi drun,run -show drun"
+bindsym $mod+Ctrl+a exec "rofi -show drun -theme ~/.config/rofi/launcher.rasi"
+bindsym $mod+Ctrl+f exec "rofi -show filebrowser -theme ~/.config/rofi/launcher.rasi"
+bindsym $mod+Ctrl+w exec "rofi -show window -theme ~/.config/rofi/launcher.rasi -theme-str 'listview { columns: 1; }'"
 
 # change focus
 bindsym $mod+h focus left
