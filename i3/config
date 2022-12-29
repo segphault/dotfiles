@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # Font for window titles
-font pango:JetBrains Mono Nerd Font 12
+font pango:JetBrainsMono Nerd Font 12
 
 # Colors                border  bg      text    indictr chldborder
 client.focused          #242D3E #1360A5 #ffffff #2e9ef4 #242D3E
@@ -21,6 +21,9 @@ exec --no-startup-id picom
 
 # Start the PulseAudio sound server
 exec --no-startup-id pulseaudio
+
+# Set the wallpaper
+exec ~/.fehbg
 
 # Start Polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
@@ -42,9 +45,16 @@ bindsym $mod+Return exec kitty
 bindsym $mod+c kill
 
 # display the launcher
-bindsym $mod+Ctrl+a exec "rofi -show drun -theme ~/.config/rofi/launcher.rasi"
+bindsym $mod+space exec "rofi -show drun -theme ~/.config/rofi/launcher.rasi"
+bindsym $mod+Tab exec "rofi -show window -theme ~/.config/rofi/launcher.rasi -theme-str 'listview { columns: 1; }'"
 bindsym $mod+Ctrl+f exec "rofi -show filebrowser -theme ~/.config/rofi/launcher.rasi"
-bindsym $mod+Ctrl+w exec "rofi -show window -theme ~/.config/rofi/launcher.rasi -theme-str 'listview { columns: 1; }'"
+
+# open a browser window
+bindsym $mod+Ctrl+w exec vivaldi
+bindsym $mod+Ctrl+e exec vivaldi --incognito
+
+# take a screenshot
+bindsym $mod+ctrl+s exec import -window root screenshot.png
 
 # change focus
 bindsym $mod+h focus left
@@ -87,7 +97,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Ctrl+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent

@@ -5,6 +5,7 @@
 !ranger
 !kitty
 !rofi
+!gtk-3.0
 !.gitignore
 
 ranger/plugins
