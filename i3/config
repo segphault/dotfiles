@@ -1,53 +1,50 @@
-# Set the windows key as the default modifier
+# set the windows key as the default modifier
 set $mod Mod4
 
-# Font for window titles
+# font for window titles
 font pango:JetBrainsMono Nerd Font 12
 
-# Colors                border  bg      text    indictr chldborder
-client.focused          #242D3E #1360A5 #ffffff #2e9ef4 #242D3E
-client.focused_inactive #242D3E #313F56 #ffffff #2e9ef4 #242D3E
-client.unfocused        #333333 #212A39 #888888 #292d2e #222222
+# Titlebar customization
+title_align center
 
-# Start XDG autostart .desktop files using dex.
-# https://wiki.archlinux.org/index.php/XDG_Autostart
+# set colors             border  bg      text    indictr chldborder
+client.focused           #242D3E #1360A5 #ffffff #2e9ef4 #242D3E
+client.focused_inactive  #242D3E #313F56 #ffffff #2e9ef4 #242D3E
+client.unfocused         #333333 #212A39 #888888 #292d2e #222222
+
+# start XDG autostart using dex
 exec --no-startup-id dex --autostart --environment i3
 
-# Start the network manager applet
+# start the network manager applet
 exec --no-startup-id nm-applet
 
-# Start the Picom compositor
+# start the Picom compositor
 exec --no-startup-id picom
 
-# Start the PulseAudio sound server
+# start the PulseAudio sound server
 exec --no-startup-id pulseaudio
 
-# Set the wallpaper
+# set the wallpaper
 exec ~/.fehbg
 
 # Start Polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Use Mouse+$mod to drag floating windows to their wanted position
+# use mouse+$mod to drag floating windows
 floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec kitty
 
-# kill focused window
+# kill window
 bindsym $mod+c kill
+bindsym button2 kill
+bindsym --whole-window $mod+button2 kill
 
 # display the launcher
-bindsym $mod+space exec "rofi -show drun -theme ~/.config/rofi/launcher.rasi"
-bindsym $mod+Tab exec "rofi -show window -theme ~/.config/rofi/launcher.rasi -theme-str 'listview { columns: 1; }'"
-bindsym $mod+Ctrl+f exec "rofi -show filebrowser -theme ~/.config/rofi/launcher.rasi"
+bindsym $mod+space exec "rofi -show drun"
+bindsym $mod+Tab exec "rofi -show window"
+bindsym $mod+Ctrl+f exec "rofi -show filebrowser"
 
 # open a browser window
 bindsym $mod+Ctrl+w exec vivaldi
@@ -93,17 +90,26 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+Ctrl+space focus mode_toggle
-
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
+
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+
+# toggle floating
+bindsym $mod+x floating toggle
+
+# Move current window to scratchpad
+bindsym $mod+z move scratchpad
+
+# change focus between tiling / floating windows
+bindsym $mod+Shift+space focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -144,19 +150,13 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace
 bindsym $mod+Shift+r restart
-# exit i3 and logs out your X session
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
+        # vim-style resize bindings
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
@@ -176,7 +176,3 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Titlebar customization
-# for_window [class=".*"] title_window_icon padding 1px
-for_window [class=".*"] title_format "<span size='smaller'>%title</span>"
-title_align center

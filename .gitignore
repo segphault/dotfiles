@@ -6,6 +6,9 @@
 !kitty
 !rofi
 !gtk-3.0
+!dunst
 !.gitignore
+!picom.conf
 
 ranger/plugins
+gtk-3.0/bookmarks

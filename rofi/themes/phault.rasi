@@ -1,0 +1,66 @@
+
+* {
+  color-background: rgba(24, 30, 41, 0.95);
+  color-foreground: #FFFFFF;
+  color-highlight: #399EF4;
+  color-selected: #1360A5;
+  color-input: #1C2431; 
+
+  font: "JetBrains Mono Nerd Font 12";
+  background-color: transparent;
+  text-color: @color-foreground;
+  vertical-align: 0.5;
+}
+
+window {
+  transparency: "real";
+  background-color: @color-background;
+  border-color: @color-highlight;
+  width: 1400px;
+  padding: 15px;
+  border: 2px;
+}
+
+mainbox {
+  spacing: 15;
+  children: ["inputbar", "listview"];
+}
+
+inputbar {
+  spacing: 25;
+  padding: 15px 20px;
+  background-color: @color-input;
+  children: ["textbox-input-icon", "entry"];
+}
+
+textbox-input-icon {
+  str: "";
+  expand: false;
+}
+
+entry {
+  placeholder: "Search";
+  cursor: text;
+}
+
+listview {
+  columns: 3;
+}
+
+element {
+  padding: 8px;
+  spacing: 10px;
+}
+
+element-icon {
+  size: 32px;
+}
+
+element selected.normal,
+element selected.active {
+  background-color: @color-selected;
+}
+
+element-text.active {
+  text-color: @color-highlight;
+}

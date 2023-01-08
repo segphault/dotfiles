@@ -1,0 +1,19 @@
+@import "phault"
+
+window {
+  width: 600px;
+}
+
+mainbox {
+  children: ["prompt", "listview"];
+}
+
+prompt {
+  font: "DejaVu Sans 18"; 
+  horizontal-align: 0.5;
+}
+
+listview {
+  layout: horizontal;
+  spacing: 10;
+}
