@@ -7,7 +7,7 @@ def print_item(name, icon, info):
 
 match os.environ.get("ROFI_INFO", "").split(":"):
   case ["cancel"]: pass
-  case ["exit"]: os.system("i3-msg quit")
+  case ["exit"]: os.system("i3-msg exit")
   case ["suspend"]: os.system("systemctl suspend")
   case ["reboot"]: os.system("systemctl reboot")
   case ["shutdown"]: os.system("systemctl poweroff")

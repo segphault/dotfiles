@@ -45,13 +45,14 @@ bindsym --whole-window $mod+button2 kill
 bindsym $mod+space exec "rofi -show drun"
 bindsym $mod+Tab exec "rofi -show window"
 bindsym $mod+Ctrl+f exec "rofi -show filebrowser"
+bindsym $mod+Ctrl+z exec "rofi -show scratch -modi 'scratch:~/.config/rofi/scripts/scratchpad.py'"
 
 # open a browser window
 bindsym $mod+Ctrl+w exec vivaldi
 bindsym $mod+Ctrl+e exec vivaldi --incognito
 
 # take a screenshot
-bindsym $mod+ctrl+s exec import -window root screenshot.png
+bindsym --release $mod+Print exec --no-startup-id import png:- | xclip -selection clipboard -t image/png
 
 # change focus
 bindsym $mod+h focus left
@@ -175,4 +176,8 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# set gaps
+gaps inner 20px
+smart_gaps on
 
