@@ -51,6 +51,21 @@ bindsym $mod+Ctrl+z exec "rofi -show scratch -modi 'scratch:~/.config/rofi/scrip
 bindsym $mod+Ctrl+w exec vivaldi
 bindsym $mod+Ctrl+e exec vivaldi --incognito
 
+# open todoist
+bindsym $mod+Ctrl+t exec vivaldi --app="https://todoist.com"
+for_window [instance="todoist.com"] floating enable, resize set 1000 1200, move position center
+
+# open chatgpt
+bindsym $mod+Mod1+c exec vivaldi --app="https://chat.openai.com/chat"
+for_window [instance="chat.openai.com__chat"] floating enable, resize set 1000 1200, move position center
+
+bindsym $mod+Mod1+d exec vivaldi --app="http://devdocs.io"
+for_window [instance="devdocs.io"] floating enable, resize set 1500 1500, move position center
+
+# jump to apps
+bindsym $mod+Mod1+s [class="Spotify"] focus
+bindsym $mod+Mod1+n [class="obsidian"] focus
+
 # take a screenshot
 bindsym --release $mod+Print exec --no-startup-id import png:- | xclip -selection clipboard -t image/png
 
