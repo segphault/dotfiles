@@ -1,0 +1,198 @@
+output DSI-1 scale 1.25
+output DSI-1 transform 90
+
+input "type:touchpad" {
+  dwt enabled
+  tap enabled
+  middle_emulation enabled
+}
+
+# set the windows key as the default modifier
+set $mod Mod4
+
+# font for window titles
+font pango:JetBrainsMono Nerd Font 10
+
+# Titlebar customization
+title_align center
+
+# set colors             border  bg      text    indictr chldborder
+client.focused           #242D3E #1360A5 #ffffff #2e9ef4 #242D3E
+client.focused_inactive  #242D3E #313F56 #ffffff #2e9ef4 #242D3E
+client.unfocused         #333333 #212A39 #888888 #292d2e #222222
+
+# start the launcher
+exec --no-startup-id ./Applications/vicinae server
+
+# start the network manager applet
+#  exec --no-startup-id nm-applet
+
+# set the wallpaper
+exec  swaybg -m fill -i "/home/segphault/Dropbox/Pictures/Wallpaper/Low Poly/abstract-lines-blue-dim.jpg"
+# exec ~/.fehbg
+
+# Start Quickshell
+exec_always quickshell
+
+# use mouse+$mod to drag floating windows
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec foot
+
+# kill window
+bindsym $mod+c kill
+bindsym button2 kill
+bindsym --whole-window $mod+button2 kill
+
+# display the launcher
+bindsym $mod+space exec "./Applications/vicinae open"
+bindsym $mod+Tab exec "./Applications/vicinae vicinae://extensions/vicinae/wm/switch-windows"
+#bindsym $mod+Ctrl+f exec "rofi -show filebrowser"
+#bindsym $mod+Ctrl+z exec "rofi -show scratch -modi 'scratch:~/.config/rofi/scripts/scratchpad.py'"
+
+# open a browser window
+bindsym $mod+Ctrl+w exec vivaldi
+bindsym $mod+Ctrl+e exec vivaldi --incognito
+
+# open applications
+#bindsym $mod+Mod1+n exec obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland
+bindsym $mod+Mod1+m exec vivaldi --app="https://app.fastmail.com/mail/Inbox"
+bindsym $mod+Mod1+t exec vivaldi --app="https://todoist.com"
+bindsym $mod+Mod1+c exec vivaldi --app="https://chat.openai.com/chat"
+bindsym $mod+Mod1+d exec vivaldi --app="http://devdocs.io"
+
+# jump to apps
+#bindsym $mod+Mod1+s [class="Spotify"] focus
+bindsym $mod+Mod1+n [app_id="obsidian"] focus
+
+# take a screenshot
+bindsym --release $mod+Print exec --no-startup-id import png:- | xclip -selection clipboard -t image/png
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+
+# change focus with arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# change focus with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+v split h
+
+# split in vertical orientation
+bindsym $mod+s split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+d focus child
+
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+
+# toggle floating
+bindsym $mod+x floating toggle
+
+# Move current window to scratchpad
+bindsym $mod+z move scratchpad
+
+# change focus between tiling / floating windows
+bindsym $mod+Shift+space focus mode_toggle
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace
+bindsym $mod+Shift+r restart
+
+# resize window
+mode "resize" {
+        # vim-style resize bindings
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# set gaps
+gaps inner 10
+smart_gaps on
+

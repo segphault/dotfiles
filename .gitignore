@@ -9,6 +9,8 @@
 !dunst
 !.gitignore
 !picom.conf
+!quickshell
+!sway
 
 ranger/plugins
 gtk-3.0/bookmarks
